@@ -1,0 +1,149 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="color-scheme" content="dark" />
+    <title>Opportunity Scout</title>
+    <link rel="stylesheet" href="/styles.css" />
+  </head>
+  <body>
+    <main>
+      <header class="hero">
+        <p class="eyebrow">PRIVATE · LOCAL · APPROVAL-GATED</p>
+        <h1>Opportunity Scout</h1>
+        <p class="lede">
+          Find recurring manual-workflow pain in approved Reddit communities,
+          then keep every publish action behind a fresh human confirmation.
+        </p>
+        <div id="status" class="status">Loading local status…</div>
+      </header>
+
+      <section class="card" id="setup-card">
+        <div class="section-heading">
+          <span>01</span>
+          <div>
+            <h2>Secure OAuth setup</h2>
+            <p>Credentials are stored in macOS Keychain, never in this project.</p>
+          </div>
+        </div>
+        <form id="setup-form" class="grid-form">
+          <label>
+            Reddit username
+            <input name="username" autocomplete="username" required />
+          </label>
+          <label>
+            OAuth client ID
+            <input name="clientId" autocomplete="off" required />
+          </label>
+          <label class="span-two">
+            OAuth client secret
+            <input
+              name="clientSecret"
+              type="password"
+              autocomplete="new-password"
+              required
+            />
+          </label>
+          <div class="actions span-two">
+            <button type="submit">Save securely</button>
+            <a class="button secondary" id="connect-link" href="/auth/reddit">
+              Connect Reddit
+            </a>
+            <button type="button" class="ghost" id="disconnect-button">
+              Disconnect
+            </button>
+          </div>
+        </form>
+        <p class="fine" id="oauth-details"></p>
+      </section>
+
+      <section class="card">
+        <div class="section-heading">
+          <span>02</span>
+          <div>
+            <h2>Bounded workflow-friction scan</h2>
+            <p>One deliberate scan, proposed communities, ten-minute hard stop.</p>
+          </div>
+        </div>
+        <form id="scan-form" class="grid-form">
+          <label class="span-two">
+            Search phrases, one per line
+            <textarea name="queries" rows="6" required>"there has to be a better way"
+"I wish there were an easier way"
+"how do you keep track of"
+manual every week
+forgot return deadline</textarea>
+          </label>
+          <label class="span-two">
+            Approved subreddits, comma separated
+            <textarea name="subreddits" rows="3"></textarea>
+          </label>
+          <label>
+            Time window
+            <select name="time">
+              <option value="month">Past month</option>
+              <option value="year" selected>Past year</option>
+              <option value="all">All time</option>
+            </select>
+          </label>
+          <label>
+            Evidence threads
+            <input name="maxPosts" type="number" min="1" max="25" value="15" />
+          </label>
+          <div class="actions span-two">
+            <button type="submit">Run bounded scan</button>
+          </div>
+        </form>
+        <div id="scan-output" class="output" aria-live="polite"></div>
+      </section>
+
+      <section class="card danger-zone">
+        <div class="section-heading">
+          <span>03</span>
+          <div>
+            <h2>Owner-confirmed publish</h2>
+            <p>
+              Nothing posts automatically. Prepare, review, then type a unique
+              confirmation phrase that expires after five minutes.
+            </p>
+          </div>
+        </div>
+        <form id="write-form" class="grid-form">
+          <label>
+            Kind
+            <select name="kind" id="write-kind">
+              <option value="post">Post</option>
+              <option value="comment">Comment</option>
+            </select>
+          </label>
+          <label id="subreddit-field">
+            Subreddit
+            <input name="subreddit" placeholder="productivity" />
+          </label>
+          <label class="span-two" id="title-field">
+            Title
+            <input name="title" maxlength="300" />
+          </label>
+          <label class="span-two hidden" id="parent-field">
+            Parent fullname
+            <input name="parent" placeholder="t3_abc123" />
+          </label>
+          <label class="span-two">
+            Exact text
+            <textarea name="text" rows="7"></textarea>
+          </label>
+          <label class="span-two" id="url-field">
+            Optional link URL
+            <input name="url" type="url" />
+          </label>
+          <div class="actions span-two">
+            <button type="submit" class="danger">Prepare — do not publish</button>
+          </div>
+        </form>
+        <div id="write-review" class="output" aria-live="polite"></div>
+      </section>
+    </main>
+    <script src="/app.js" type="module"></script>
+  </body>
+</html>

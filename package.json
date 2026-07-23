@@ -1,0 +1,16 @@
+{
+  "name": "opportunity-scout",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "A local, open-source, approval-gated Reddit workflow-friction research client for one individual's non-commercial use, with human-confirmed posting.",
+  "scripts": {
+    "start": "node src/server.js",
+    "test": "node --test",
+    "check": "node --check src/server.js && node --check src/reddit.js && node --check src/scan.js"
+  },
+  "engines": {
+    "node": ">=22"
+  },
+  "license": "MIT"
+}
